@@ -1,0 +1,75 @@
+body {
+  background-color: #f5e8d0;
+}
+
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.main {
+  display: flex;
+  flex: 1;
+}
+
+.navbar,
+.sidebar {
+  background-color: #6f4e37; /* Coffee brown */
+  color: white;
+}
+
+.sidebar {
+  min-height: 100vh;
+  width: 250px; /* Sidebar width */
+  padding: 20px;
+  position: fixed; /* Keep the sidebar fixed */
+  height: 100%;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.content {
+  margin-left: 250px;
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+}
+
+.stat-card {
+  background-color: #d2b48c;
+  color: #6f4e37;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.menu-item {
+  background-color: #d2b48c;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+
+.menu-item img {
+  width: 100px;
+  height: auto;
+  margin-right: 20px;
+}
+
+footer {
+  background-color: #6f4e37; /* Same color as the sidebar */
+  color: white;
+  padding: 10px;
+  text-align: center;
+  margin-left: 20px; /* Small gap between footer and sidebar */
+}

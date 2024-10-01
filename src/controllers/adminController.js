@@ -1,10 +1,7 @@
 const express = require('express');
-const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const prisma = require('../models');
-const upload = require('../config/multer');
-const verifyAdmin = require('../middleware/VerifyAdmin');
 
 // Admin Login
 exports.postLogin = async (req, res) => {
@@ -20,6 +17,25 @@ exports.postLogin = async (req, res) => {
   });
   res.cookie('adminToken', token, { httpOnly: true });
   res.redirect('/admin/dashboard');
+};
+
+exports.getDashboard = async (req, res) => {
+  try {
+    // Fetch totals
+    const totalMenuItems = await prisma.menu.count();
+    const totalOrders = await prisma.order.count();
+    const totalReviews = await prisma.review.count();
+
+    // Render the dashboard page with totals
+    res.render('admin/dashboard', {
+      totalMenuItems,
+      totalOrders,
+      totalReviews,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error loading admin dashboard');
+  }
 };
 
 // Add new menu item

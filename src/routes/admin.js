@@ -14,9 +14,7 @@ router.get('/login', (req, res) => {
   res.render('admin/login');
 });
 
-router.get('/dashboard', verifyAdmin, (req, res) => {
-  res.render('admin/dashboard');
-});
+router.get('/dashboard', verifyAdmin, adminController.getDashboard);
 
 router.post('/login', adminController.postLogin);
 
