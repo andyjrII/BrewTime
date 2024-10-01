@@ -1,0 +1,14 @@
+<h2>Manage Reviews</h2>
+
+<ul>
+  <% reviews.forEach(review => { %>
+  <li>
+    <strong><%= review.customerName %></strong> - <%= review.rating %> stars
+    <br />
+    <%= review.review %>
+    <form action="/admin/reviews/delete/<%= review.id %>" method="POST">
+      <button type="submit">Delete</button>
+    </form>
+  </li>
+  <% }); %>
+</ul>

@@ -1,0 +1,22 @@
+<h2>Manage Orders</h2>
+
+<ul>
+  <% orders.forEach(order => { %>
+    <li>
+      <strong>Order ID:</strong> <%= order.id %> - <%= order.customerName %>
+      <br>
+      <strong>Items:</strong> <%= order.items %>
+      <br>
+      <strong>Total:</strong> $<%= order.totalAmount %>
+      <br>
+      <strong>Status:</strong> <%= order.paymentStatus %>
+      <form action="/admin/orders/update/<%= order.id %>" method="POST">
+        <select name="status">
+          <option value="Pending" <%= order.paymentStatus === 'Pending' ? 'selected' : '' %>>Pending</option>
+          <option value="Paid" <%= order.paymentStatus === 'Paid' ? 'selected' : '' %>>Paid</option>
+        </select>
+        <button type="submit">Update Status</button>
+      </form>
+    </li>
+  <% }) %>
+</ul>

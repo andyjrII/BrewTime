@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Menu</title>
+  </head>
+  <body>
+    <h1>Manage Menu</h1>
+    <a href="/admin/menu/add">Add New Menu Item</a>
+
+    <ul>
+      <% menuItems.forEach(item => { %>
+      <li>
+        <img src="<%= item.imageUrl %>" alt="<%= item.name %>" width="100" />
+        <strong><%= item.name %></strong> - $<%= item.price %>
+        <p><%= item.description %></p>
+        <form action="/admin/menu/<%= item.id %>/delete" method="POST">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+      <% }); %>
+    </ul>
+  </body>
+</html>

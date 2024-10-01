@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Menu Item</title>
+  </head>
+  <body>
+    <h1>Add New Menu Item</h1>
+    <form action="/admin/menu/add" method="POST" enctype="multipart/form-data">
+      <input type="text" name="name" placeholder="Item Name" required />
+      <textarea
+        name="description"
+        placeholder="Item Description"
+        required
+      ></textarea>
+      <input
+        type="number"
+        step="100"
+        name="price"
+        placeholder="Price"
+        required
+      />
+      <input type="file" name="image" accept="image/*" required />
+      <button type="submit">Add Menu Item</button>
+    </form>
+  </body>
+</html>

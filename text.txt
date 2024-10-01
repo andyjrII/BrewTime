@@ -1,1 +1,0 @@
-postgres://avnadmin:AVNS_LC52dHO3N8b4Ny3-FQP@pg-django-andy-django.e.aivencloud.com:17237/brewtime?sslmode=require
