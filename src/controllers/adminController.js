@@ -161,3 +161,10 @@ exports.updateOrderStatus = async (req, res) => {
     res.redirect('/admin/orders?error=Failed to update order status');
   }
 };
+
+// Delete review
+exports.postDeleteReview = async (req, res) => {
+  const { id } = req.params;
+  await prisma.review.delete({ where: { id: Number(id) } });
+  res.redirect('/admin/reviews');
+};

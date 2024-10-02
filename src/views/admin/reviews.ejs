@@ -1,14 +1,40 @@
-<h2>Manage Reviews</h2>
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/adminHead', { title: "Manage Reviews" }) %>
+  <body>
+    <div class="wrapper">
+      <div class="main">
+        <%- include('../partials/sidebar') %>
+        <!-- Dashboard Content -->
+        <div class="content p-4">
+          <div class="container">
+            <h1 class="mb-4">Manage Reviews</h1>
 
-<ul>
-  <% reviews.forEach(review => { %>
-  <li>
-    <strong><%= review.customerName %></strong> - <%= review.rating %> stars
-    <br />
-    <%= review.review %>
-    <form action="/admin/reviews/delete/<%= review.id %>" method="POST">
-      <button type="submit">Delete</button>
-    </form>
-  </li>
-  <% }); %>
-</ul>
+            <ul class="list-group">
+              <% reviews.forEach(review => { %>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-start"
+              >
+                <div>
+                  <strong class="me-2"><%= review.customerName %></strong>
+                  <p class="mb-1"><%= review.review %></p>
+                </div>
+                <form
+                  action="/admin/reviews/delete/<%= review.id %>"
+                  method="POST"
+                >
+                  <button type="submit" class="btn btn-danger btn-sm">
+                    Delete
+                  </button>
+                </form>
+              </li>
+              <% }); %>
+            </ul>
+          </div>
+
+          <%- include('../partials/adminFooter') %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -56,11 +56,11 @@ router.get('/reviews', verifyAdmin, async (req, res) => {
 });
 
 // Delete review
-router.post('/reviews/delete/:id', verifyAdmin, async (req, res) => {
-  const { id } = req.params;
-  await prisma.review.delete({ where: { id: Number(id) } });
-  res.redirect('/admin/reviews');
-});
+router.post(
+  '/reviews/delete/:id',
+  verifyAdmin,
+  adminController.postDeleteReview
+);
 
 // Logout
 router.get('/logout', (req, res) => {
