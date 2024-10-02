@@ -1,22 +1,57 @@
-<h2>Manage Orders</h2>
-
-<ul>
-  <% orders.forEach(order => { %>
-    <li>
-      <strong>Order ID:</strong> <%= order.id %> - <%= order.customerName %>
-      <br>
-      <strong>Items:</strong> <%= order.items %>
-      <br>
-      <strong>Total:</strong> $<%= order.totalAmount %>
-      <br>
-      <strong>Status:</strong> <%= order.paymentStatus %>
-      <form action="/admin/orders/update/<%= order.id %>" method="POST">
-        <select name="status">
-          <option value="Pending" <%= order.paymentStatus === 'Pending' ? 'selected' : '' %>>Pending</option>
-          <option value="Paid" <%= order.paymentStatus === 'Paid' ? 'selected' : '' %>>Paid</option>
-        </select>
-        <button type="submit">Update Status</button>
-      </form>
-    </li>
-  <% }) %>
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/adminHead', { title: "Manage Orders" }) %>
+  <body>
+    <div class="wrapper">
+      <div class="main">
+        <%- include('../partials/sidebar') %>
+        <!-- Dashboard Content -->
+        <div class="content p-4">
+          <div class="container">
+            <h1 class="mb-4">Manage Orders</h1>
+          
+            <% if (successMessage) { %>
+              <div class="alert alert-success">
+                <%= successMessage %>
+              </div>
+            <% } %>
+            <% if (errorMessage) { %>
+              <div class="alert alert-danger">
+                <%= errorMessage %>
+              </div>
+            <% } %>
+          
+            <ul class="list-group">
+              <% orders.forEach(order => { %>
+                <li class="list-group-item mb-3">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <strong>Order ID:</strong> <%= order.id %><br />
+                      <strong>Customer:</strong> <%= order.customerName %><br />
+                      <strong>Items:</strong> <%= order.items %><br />
+                      <strong>Total:</strong> $<%= order.totalAmount.toFixed(2) %><br />
+                      <strong>Status:</strong> <span class="badge bg-success"><%= order.paymentStatus %></span>
+                    </div>
+                    <div>
+                      <form action="/admin/orders/update/<%= order.id %>" method="POST">
+                        <div class="form-group">
+                          <select name="status" class="form-select">
+                            <option value="Pending" <%= order.paymentStatus === 'Pending' ? 'selected' : '' %>>Pending</option>
+                            <option value="Paid" <%= order.paymentStatus === 'Paid' ? 'selected' : '' %>>Paid</option>
+                          </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2">Update Status</button>
+                      </form>
+                    </div>
+                  </div>
+                </li>
+              <% }) %>
+            </ul>
+          </div>
+          
+          <%- include('../partials/adminFooter') %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

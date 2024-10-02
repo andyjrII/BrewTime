@@ -201,8 +201,7 @@
                   body: JSON.stringify({
                     customerName: customerName,
                     menuItemName: "<%= menuItem.name %>",
-                    totalAmount: <%= menuItem.price %>,
-                    paymentStatus: "Successful",
+                    totalAmount: <%= menuItem.price %>
                   }),
                 })
                   .then((res) => res.json())

@@ -120,3 +120,44 @@ exports.postDeleteMenu = async (req, res) => {
   await prisma.menu.delete({ where: { id: Number(id) } });
   res.redirect('/admin/menu');
 };
+
+exports.manageOrders = async (req, res) => {
+  try {
+    // Fetch orders from the database
+    const orders = await prisma.order.findMany();
+
+    // Get success or error message from query parameters
+    const successMessage = req.query.success || null;
+    const errorMessage = req.query.error || null;
+
+    // Render the manage orders page with the orders and messages
+    res.render('admin/orders', { orders, successMessage, errorMessage });
+  } catch (error) {
+    console.error('Error fetching orders:', error);
+    res.render('admin/orders', {
+      orders: [],
+      errorMessage: 'Failed to load orders.',
+    });
+  }
+};
+
+// Update the order status
+exports.updateOrderStatus = async (req, res) => {
+  const { id } = req.params; // Get the order ID from the URL parameters
+  const { status } = req.body; // Get the new status from the form submission
+
+  try {
+    // Update the order status in the database
+    await prisma.order.update({
+      where: { id: parseInt(id) }, // Ensure the ID is an integer
+      data: { paymentStatus: status }, // Update the payment status
+    });
+
+    // Redirect back to the manage orders page with a success message
+    res.redirect('/admin/orders?success=Order status updated successfully');
+  } catch (error) {
+    console.error('Error updating order status:', error);
+    // Redirect back with an error message
+    res.redirect('/admin/orders?error=Failed to update order status');
+  }
+};

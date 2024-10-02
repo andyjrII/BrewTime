@@ -43,22 +43,11 @@ router.post(
 // Delete menu item
 router.post('/menu/:id/delete', verifyAdmin, adminController.postDeleteMenu);
 
-// View all orders
-router.get('/orders', verifyAdmin, async (req, res) => {
-  const orders = await prisma.order.findMany();
-  res.render('admin/orders', { orders });
-});
+// route to manage orders
+router.get('/orders', adminController.manageOrders);
 
 // Update order status
-router.post('/orders/update/:id', verifyAdmin, async (req, res) => {
-  const { id } = req.params;
-  const { status } = req.body;
-  await prisma.order.update({
-    where: { id: Number(id) },
-    data: { paymentStatus: status },
-  });
-  res.redirect('/admin/orders');
-});
+router.post('/orders/update/:id', adminController.updateOrderStatus);
 
 // View all reviews
 router.get('/reviews', verifyAdmin, async (req, res) => {

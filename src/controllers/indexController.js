@@ -63,10 +63,10 @@ exports.postAddReview = async (req, res) => {
 exports.postSaveOrder = async (req, res) => {
   try {
     // Destructure the fields from the request body
-    const { customerName, menuItemName, totalAmount, paymentStatus } = req.body;
+    const { customerName, menuItemName, totalAmount } = req.body;
 
     // Check if the required fields are provided
-    if (!customerName || !menuItemName || !totalAmount || !paymentStatus) {
+    if (!customerName || !menuItemName || !totalAmount) {
       return res.status(400).json({
         success: false,
         message:
@@ -79,8 +79,7 @@ exports.postSaveOrder = async (req, res) => {
       data: {
         customerName: customerName,
         items: menuItemName, // Save the menu item name as the items field
-        totalAmount: parseFloat(totalAmount), // Ensure totalAmount is a float
-        paymentStatus: paymentStatus, // Either "Successful" or "Failed"
+        totalAmount: parseFloat(totalAmount),
         createdAt: new Date(), // Automatically captures the current date and time
       },
     });
