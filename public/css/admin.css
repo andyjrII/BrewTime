@@ -2,6 +2,49 @@ body {
   background-color: #f5e8d0;
 }
 
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-box {
+  background-color: #ffffff; /* White box for the form */
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-box h2 {
+  color: #6f4e37; /* Dark coffee color for the heading */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-control {
+  border-color: #6f4e37; /* Dark coffee color for input border */
+  border-radius: 5px;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #d2b48c; /* Light coffee color on focus */
+}
+
+.btn-coffee {
+  background-color: #6f4e37; /* Dark coffee button */
+  color: #ffffff;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.btn-coffee:hover {
+  background-color: #8b5e3c; /* Slightly lighter coffee color on hover */
+}
+
 .wrapper {
   display: flex;
   min-height: 100vh;
@@ -71,5 +114,5 @@ footer {
   color: white;
   padding: 10px;
   text-align: center;
-  margin-left: 20px; /* Small gap between footer and sidebar */
+  margin-left: 20px;
 }
