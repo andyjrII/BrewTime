@@ -9,9 +9,7 @@
         <div class="content p-4">
           <div class="container">
             <h1 class="mb-4">Manage Menu</h1>
-            <a href="/admin/menu/add" class="btn btn-primary mb-3"
-              >Add New Menu Item</a
-            >
+
             <div class="row">
               <% menuItems.forEach(item => { %>
               <div class="col-12 mb-3">
@@ -53,13 +51,16 @@
                     <div>
                       <h5 class="card-title"><%= item.name %></h5>
                       <p class="card-text"><%= item.description %></p>
-                      <strong>Price:</strong> $<%= item.price %>
+                      <strong>Price:</strong> &#x20A6;<%= item.price %>
                     </div>
                   </div>
                 </div>
               </div>
               <% }); %>
             </div>
+            <a href="/admin/menu/add" class="btn btn-primary mb-3"
+              >Add New Menu Item</a
+            >
           </div>
           <%- include('../partials/adminFooter') %>
         </div>

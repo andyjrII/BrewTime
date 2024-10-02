@@ -20,6 +20,7 @@ model Menu {
   price       Float
   image       String
   createdAt   DateTime @default(now())
+  reviews     Review[]
 }
 
 model Admin {
@@ -45,4 +46,6 @@ model Review {
   review       String
   rating       Int
   createdAt    DateTime @default(now())
+  menuId       Int
+  menu         Menu     @relation(fields: [menuId], references: [id])
 }

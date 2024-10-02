@@ -2,7 +2,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const prisma = require('../models');
 const cloudinary = require('cloudinary').v2;
-const { extractPublicIdFromUrl } = require('../utils/cloudinaryUtils');
 
 // Admin Login
 exports.postLogin = async (req, res) => {
