@@ -16,3 +16,57 @@
 .btn-coffee:hover {
   background-color: #e79c40;
 }
+
+.fa-brands {
+  font-size: 50px;
+}
+
+#team {
+  background: url('img/antique-cafe-bg-04.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+.container {
+  max-width: 1200px; /* Adjust as needed */
+  margin: 0 auto;
+  padding: 0 15px; /* Ensures padding on smaller screens */
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(300px, 1fr)
+  ); /* Creates a responsive grid */
+  gap: 20px; /* Spacing between cards */
+  margin-top: 20px; /* Space above the grid */
+}
+
+.team-member {
+  background-color: white; /* Background for each team member card */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Inner padding */
+  text-align: center; /* Center text */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+.team-member img {
+  width: 100px; /* Adjust size as needed */
+  height: 100px; /* Keep a square aspect ratio */
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.team-member h3 {
+  margin: 10px 0 5px; /* Margin between name and position */
+  font-size: 1.2em; /* Font size for name */
+}
+
+.team-member p {
+  color: #555; /* Color for text */
+  margin: 5px 0; /* Margin for spacing */
+}
+
+.bio {
+  margin-top: 10px; /* Margin above bio */
+}
