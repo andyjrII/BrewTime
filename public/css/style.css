@@ -72,3 +72,17 @@
 .bio {
   margin-top: 10px; /* Margin above bio */
 }
+
+.menu-body {
+  background-image: url('../img/menu-bg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: max-content;
+}
