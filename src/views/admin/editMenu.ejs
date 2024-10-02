@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/adminHead', {title: "Edit Menu Item"}) %>
+  <body>
+    <div class="wrapper">
+      <div class="main">
+        <%- include('../partials/sidebar') %>
+        <!-- Dashboard Content -->
+        <div class="content p-4">
+          <div class="container">
+            <h1>Edit Menu Item</h1>
+            <form
+              action="/admin/menu/<%= menuItem.id %>/edit"
+              method="POST"
+              enctype="multipart/form-data"
+              class="mb-4"
+            >
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="form-control"
+                  value="<%= menuItem.name %>"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea
+                  id="description"
+                  name="description"
+                  class="form-control"
+                  rows="3"
+                  required
+                >
+<%= menuItem.description %></textarea
+                >
+              </div>
+
+              <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input
+                  type="number"
+                  id="price"
+                  name="price"
+                  class="form-control"
+                  value="<%= menuItem.price %>"
+                  step="0.01"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input
+                  type="file"
+                  id="image"
+                  name="image"
+                  class="form-control"
+                />
+                <p>Current Image:</p>
+                <img
+                  src="<%= menuItem.image %>"
+                  alt="<%= menuItem.name %>"
+                  width="100"
+                />
+              </div>
+
+              <button type="submit" class="btn btn-success">
+                Save Changes
+              </button>
+              <a href="/admin/menu" class="btn btn-secondary">Cancel</a>
+            </form>
+          </div>
+          <%- include('../partials/adminFooter') %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

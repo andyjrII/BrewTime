@@ -13,28 +13,17 @@ router.get('/', verifyAdmin, async (req, res) =>
 router.get('/login', (req, res) => {
   res.render('admin/login');
 });
+router.post('/login', adminController.postLogin);
 
 router.get('/dashboard', verifyAdmin, adminController.getDashboard);
 
-router.post('/login', adminController.postLogin);
-
-// Logout
-router.get('/logout', (req, res) => {
-  res.clearCookie('adminToken');
-  res.redirect('/admin/login');
-});
-
 // View all menu items
-router.get('/menu', verifyAdmin, async (req, res) => {
-  const menuItems = await prisma.menu.findMany();
-  res.render('admin/menu', { menuItems });
-});
+router.get('/menu', verifyAdmin, adminController.getMenu);
 
+// Add new menu item
 router.get('/menu/add', verifyAdmin, (req, res) => {
   res.render('admin/addMenu');
 });
-
-// Add new menu item
 router.post(
   '/menu/add',
   verifyAdmin,
@@ -43,22 +32,16 @@ router.post(
 );
 
 // Edit menu item
-router.post('/menu/edit/:id', verifyAdmin, async (req, res) => {
-  const { id } = req.params;
-  const { name, description, price, image } = req.body;
-  await prisma.menu.update({
-    where: { id: Number(id) },
-    data: { name, description, price, image },
-  });
-  res.redirect('/admin/menu');
-});
+router.get('/menu/:id/edit', verifyAdmin, adminController.getEditMenu);
+router.post(
+  '/menu/:id/edit',
+  verifyAdmin,
+  upload.single('image'),
+  adminController.postEditMenu
+);
 
 // Delete menu item
-router.post('/menu/delete/:id', verifyAdmin, async (req, res) => {
-  const { id } = req.params;
-  await prisma.menu.delete({ where: { id: Number(id) } });
-  res.redirect('/admin/menu');
-});
+router.post('/menu/:id/delete', verifyAdmin, adminController.postDeleteMenu);
 
 // View all orders
 router.get('/orders', verifyAdmin, async (req, res) => {
@@ -88,6 +71,12 @@ router.post('/reviews/delete/:id', verifyAdmin, async (req, res) => {
   const { id } = req.params;
   await prisma.review.delete({ where: { id: Number(id) } });
   res.redirect('/admin/reviews');
+});
+
+// Logout
+router.get('/logout', (req, res) => {
+  res.clearCookie('adminToken');
+  res.redirect('/admin/login');
 });
 
 module.exports = router;

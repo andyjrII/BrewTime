@@ -1,28 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add Menu Item</title>
-  </head>
+  <%- include('../partials/adminHead', {title: "Add Menu Item"}) %>
   <body>
-    <h1>Add New Menu Item</h1>
-    <form action="/admin/menu/add" method="POST" enctype="multipart/form-data">
-      <input type="text" name="name" placeholder="Item Name" required />
-      <textarea
-        name="description"
-        placeholder="Item Description"
-        required
-      ></textarea>
-      <input
-        type="number"
-        step="100"
-        name="price"
-        placeholder="Price"
-        required
-      />
-      <input type="file" name="image" accept="image/*" required />
-      <button type="submit">Add Menu Item</button>
-    </form>
+    <div class="wrapper">
+      <div class="main">
+        <%- include('../partials/sidebar') %>
+        <!-- Add New Menu Item Content -->
+        <div class="content">
+          <div class="container">
+            <h1 class="mb-4">Add New Menu Item</h1>
+            <div class="card mb-3">
+              <div class="row g-0">
+                <div
+                  class="col-md-4 d-flex justify-content-center align-items-center"
+                >
+                  <img
+                    src="/img/placeholder.png"
+                    alt="New Menu Item"
+                    class="img-fluid"
+                    id="image-preview"
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <form
+                      action="/admin/menu/add"
+                      method="POST"
+                      enctype="multipart/form-data"
+                      class="form"
+                    >
+                      <div class="mb-3">
+                        <label for="name" class="form-label">Item Name</label>
+                        <input
+                          type="text"
+                          name="name"
+                          id="name"
+                          class="form-control"
+                          placeholder="Enter item name"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="description" class="form-label"
+                          >Description</label
+                        >
+                        <textarea
+                          name="description"
+                          id="description"
+                          class="form-control"
+                          rows="3"
+                          placeholder="Enter item description"
+                          required
+                        ></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="price" class="form-label">Price ($)</label>
+                        <input
+                          type="number"
+                          step="10"
+                          name="price"
+                          id="price"
+                          class="form-control"
+                          placeholder="Enter price"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="image" class="form-label"
+                          >Upload Image</label
+                        >
+                        <input
+                          type="file"
+                          name="image"
+                          id="image"
+                          class="form-control"
+                          accept="image/*"
+                          required
+                          onchange="previewImage(event)"
+                        />
+                      </div>
+                      <button type="submit" class="btn btn-primary">
+                        Add Menu Item
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%- include('../partials/adminFooter') %>
+        </div>
+      </div>
+    </div>
+    <script src="js/image.js"></script>
   </body>
 </html>
