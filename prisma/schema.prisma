@@ -44,7 +44,6 @@ model Review {
   id           Int      @id @default(autoincrement())
   customerName String
   review       String
-  rating       Int
   createdAt    DateTime @default(now())
   menuId       Int
   menu         Menu     @relation(fields: [menuId], references: [id])

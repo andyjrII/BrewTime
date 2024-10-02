@@ -47,7 +47,7 @@ exports.postAddReview = async (req, res) => {
     await prisma.review.create({
       data: {
         customerName,
-        comment,
+        review: comment,
         menuId: menuItemId, // Assuming the relation is set in the database
       },
     });
@@ -62,25 +62,30 @@ exports.postAddReview = async (req, res) => {
 // POST route to save the order
 exports.postSaveOrder = async (req, res) => {
   try {
-    const {
-      customerName,
-      menuItemName,
-      totalAmount,
-      paymentStatus,
-      transactionRef,
-    } = req.body;
+    // Destructure the fields from the request body
+    const { customerName, menuItemName, totalAmount, paymentStatus } = req.body;
 
-    // Create new order in the database
+    // Check if the required fields are provided
+    if (!customerName || !menuItemName || !totalAmount || !paymentStatus) {
+      return res.status(400).json({
+        success: false,
+        message:
+          'Missing required fields. Please ensure customerName, menuItemName, totalAmount, and paymentStatus are provided.',
+      });
+    }
+
+    // Create a new order in the database
     const newOrder = await prisma.order.create({
       data: {
         customerName: customerName,
         items: menuItemName, // Save the menu item name as the items field
-        totalAmount: totalAmount,
+        totalAmount: parseFloat(totalAmount), // Ensure totalAmount is a float
         paymentStatus: paymentStatus, // Either "Successful" or "Failed"
         createdAt: new Date(), // Automatically captures the current date and time
       },
     });
 
+    // Respond with a success message
     res.status(200).json({
       success: true,
       message: 'Order saved successfully!',

@@ -32,13 +32,8 @@
             alt="<%= menuItem.name %>"
             class="img-fluid rounded shadow"
           />
-        </div>
-
-        <!-- Right Column: Menu Item Info and Reviews -->
-        <div class="col-md-6">
+          <p class="lead text-dark my-4"><%= menuItem.description %></p>
           <p class="h4 text-muted mb-3">Price: &#x20A6;<%= menuItem.price %></p>
-          <p class="lead text-dark mb-4"><%= menuItem.description %></p>
-
           <!-- Order Now Button -->
           <button
             class="btn btn-coffee text-white"
@@ -47,9 +42,12 @@
           >
             Order Now
           </button>
+        </div>
 
+        <!-- Right ColumnReviews -->
+        <div class="col-md-6">
           <!-- Customer Reviews Section -->
-          <h2 class="mt-5 mb-3 text-dark">Customer Reviews</h2>
+          <h2 class="mt-5 mb-3 text-dark">Reviews</h2>
           <ul class="list-unstyled mb-5">
             <% if (menuItem.reviews.length > 0) { %> <%
             menuItem.reviews.forEach(review => { %>
@@ -57,44 +55,46 @@
               <strong class="text-coffee-darker"
                 ><%= review.customerName %>:</strong
               >
-              <span class="text-coffee-dark"><%= review.comment %></span>
+              <span class="text-coffee-dark"><%= review.review %></span>
             </li>
             <% }) %> <% } else { %>
             <li class="text-coffee-dark italic">No reviews yet.</li>
             <% } %>
           </ul>
-
-          <!-- Add Review Form -->
-          <form
-            action="/menu/<%= menuItem.id %>/addReview"
-            method="POST"
-            class="bg-coffee-light p-4 rounded-lg shadow-md"
-          >
-            <div class="mb-3">
-              <label for="customerName" class="form-label">Your Name</label>
-              <input
-                type="text"
-                name="customerName"
-                class="form-control"
-                id="customerName"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="comment" class="form-label">Your Review</label>
-              <textarea
-                name="comment"
-                class="form-control"
-                id="comment"
-                rows="3"
-                required
-              ></textarea>
-            </div>
-            <button type="submit" class="btn btn-coffee text-white">
-              Submit Review
-            </button>
-          </form>
         </div>
+      </div>
+      <div class="row border-top mt-5">
+        <!-- Add Review Form -->
+        <h2 class="mt-3">Give us a feedback</h2>
+        <form
+          action="/menu/<%= menuItem.id %>/addReview"
+          method="POST"
+          class="bg-coffee-light p-4 rounded-lg shadow-md"
+        >
+          <div class="mb-3">
+            <label for="customerName" class="form-label">Your Name</label>
+            <input
+              type="text"
+              name="customerName"
+              class="form-control"
+              id="customerName"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="comment" class="form-label">Your Review</label>
+            <textarea
+              name="comment"
+              class="form-control"
+              id="comment"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-coffee text-white">
+            Submit Review
+          </button>
+        </form>
       </div>
     </div>
 
@@ -192,8 +192,7 @@
                   customerName: customerName,
                   menuItemName: "<%= menuItem.name %>",
                   totalAmount: <%= menuItem.price %>,
-                  paymentStatus: "Successful", // Payment successful
-                  transactionRef: response.reference,
+                  paymentStatus: "Successful",
                 }),
               })
                 .then((res) => res.json())
